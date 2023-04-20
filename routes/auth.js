@@ -1,6 +1,6 @@
 const express = require("express")
 const { registerUser, loginUser }                   = require("../controllers/auth")
-const { updateUser }                                = require("../controllers/user")
+const { updateUser, deleteUser }                                = require("../controllers/user")
 const { validatorRegisterUser, validatorLoginUser } = require("../validators/auth")
 const { validatorCreateUser, validatorGetUser }     = require("../validators/user")
 const authMiddleware                                = require("../middleware/session")
@@ -17,6 +17,9 @@ router.post("/login", validatorLoginUser, loginUser)
 router.put("/update/:id", authMiddleware, validatorGetUser, validatorCreateUser, updateUser)
 
 //ELIMINAR TU USUARIO
-router.put("/delete/:id", authMiddleware, validatorGetUser, validatorCreateUser, updateUser)
+router.put("/delete/:id", authMiddleware, validatorGetUser, deleteUser)
+
+//CALIFICA UNA WEB
+//router.put("/vote/:id", authMiddleware, validatorGetUser, deleteUser)
 
 module.exports = router
