@@ -45,6 +45,7 @@ const searchWeb = async (req, res) => {
 
 const createWeb = async (req, res) => {
     const { body } = req
+    body._id = req.commerceId
     const data = await webModel.create(body)
     res.send(data)
 }

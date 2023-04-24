@@ -2,7 +2,7 @@ const { matchedData } = require("express-validator")
 const { tokenSign } = require("../utils/handleJwt")
 const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleErrors")
-const {userModel} = require("../models")
+const {userModel, commerceModel} = require("../models")
 
 /**
  * Encargado de registrar un nuevo usuario
@@ -69,4 +69,32 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser }
+/**
+ * Encargado de hacer login del usuario
+ * @param {*} req 
+ * @param {*} res 
+ */
+const loginCommerce = async (req, res) => {
+    try {
+        _name = req.body.name
+        var commerce = await commerceModel.findOne({ name: _name }).select("name email")
+
+        if(!commerce){
+            handleHttpError(res, "COMMERCE_NOT_EXISTS", 404)
+            return
+        }
+        
+        const data = {
+            token: await tokenSign(commerce),
+            commerce
+        }
+
+        res.send(data)
+
+    }catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_LOGIN_COMMERCE")
+    }
+}
+
+module.exports = { registerUser, loginUser, loginCommerce }

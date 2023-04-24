@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb } = require("../controllers/web")
-const {validatorCreateWeb, validatorGetWeb} = require("../validators/web")
-const authMiddleware = require("../middleware/session")
+const { validatorCreateWeb, validatorGetWeb } = require("../validators/web")
+const { authMiddlewareCommerce } = require("../middleware/session")
 
 router.get("/", getWebs)
 
@@ -12,12 +12,12 @@ router.get("/search/:city", searchWeb)
 
 router.get("/search/:city/:activity", searchWeb)
 
-router.post("/", validatorCreateWeb, createWeb)
+router.post("/", authMiddlewareCommerce,  validatorCreateWeb, createWeb)
 
 //authMiddleware: que tenga el token de sesion
 //checkRol: comprobar que somos rol admin
-router.put("/:id", validatorGetWeb, validatorCreateWeb, updateWeb)
+router.put("/:id", authMiddlewareCommerce, validatorGetWeb, validatorCreateWeb, updateWeb)
 
-router.delete("/:id", validatorGetWeb, deleteWeb)
+router.delete("/:id", authMiddlewareCommerce, validatorGetWeb, deleteWeb)
 
 module.exports = router

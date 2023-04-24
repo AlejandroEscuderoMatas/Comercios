@@ -1,5 +1,6 @@
 const { check } = require("express-validator")
 const validateResults = require("../utils/handleValidator.js")
+const { webModel } = require("../models")
 
 const validatorCreateWeb = [
     check("city").exists().notEmpty().isLength( {min:3, max: 99} ),
@@ -18,4 +19,4 @@ const validatorGetWeb = [
     }
 ]
 
-module.exports = {validatorCreateWeb, validatorGetWeb}
+module.exports = {validatorCreateWeb, validatorGetWeb }
