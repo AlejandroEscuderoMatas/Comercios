@@ -88,23 +88,26 @@ DELETE http://localhost:3000/api/user/6435458e46a405a819d0901c HTTP/1.1
 
 
 
-
+###SOLO SIENDO ADMIN TENEMOS ACCESO A LAS PETICIONES DE LOS COMERCIOS
 
 GET http://localhost:3000/api/commerce/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
 
 ###
 
-GET http://localhost:3000/api/commerce/6436efb74485dd1300a637db
+GET http://localhost:3000/api/commerce/6436efe14485dd1300a637e7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
 
 ###
 
 POST http://localhost:3000/api/commerce/ HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
 
 {
-    "name": "Comercio 2",
-    "CIF": "22345673H",
-    "email": "comercio2@email.com",
+    "name": "Comercio 10",
+    "CIF": "22355693H",
+    "email": "comercio10@email.com",
     "direction": "calle Comercio numero 3",
     "phone": 567345523,
     "mediaId": "0123456789abcdef01234568"
@@ -112,21 +115,24 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/commerce/6436efb74485dd1300a637db HTTP/1.1
+PUT http://localhost:3000/api/commerce/6446ae92a50706b9e97e3b8e HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
 Content-Type: application/json
 
 {
-    "name": "Comercio 3",
-    "CIF": "12345673H",
-    "email": "comercio3@email.com",
+    "name": "Comercio 10",
+    "CIF": "22355693H",
+    "email": "comercio10@email.com",
     "direction": "calle Comercio numero 3",
-    "phone": 567345523,
+    "phone": 567345723,
     "mediaId": "0123456789abcdef01234564"
 }
 
 ###
 
 DELETE http://localhost:3000/api/commerce/6436efb74485dd1300a637db HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
+Content-Type: application/json
 
 
 
