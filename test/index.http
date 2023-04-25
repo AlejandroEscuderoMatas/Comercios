@@ -176,11 +176,11 @@ GET http://localhost:3000/api/web/search/Madrid/futbol
 
 POST http://localhost:3000/api/web/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4MDEsImV4cCI6MTY4MjQyMTAwMX0.teyjW4IcWbCC_BATDl_L90EsUFeB1XS6PlYax-bh5PU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY0NjF9.YN2zU1NdDEfQchM3TfH0TpcJVFQ6Tp6p0B7F0mYnzoc
 
 {
     "city": "Madrid",
-    "activity": "basket",
+    "activity": "sport",
     "title": "Futbol web",
     "resume": "Esto es una web"
 }
@@ -201,4 +201,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlM
 ###
 
 DELETE http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4OTcsImV4cCI6MTY4MjQyMTA5N30.BH8EmFgJEMXmdzglEcUPdqvyxPN_0l0uTkWvYRaZAxw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY5MTR9.Fn5TX9ZomV-ZdBJgs5SYVxusIIuYHiU_pGF5apvYBy8
+
+###
+
+POST http://localhost:3000/api/web/texts/6436efe14485dd1300a637e7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY5MTR9.Fn5TX9ZomV-ZdBJgs5SYVxusIIuYHiU_pGF5apvYBy8
+Content-Type: application/json
+
+{
+    "texts": "Primer texto de la web"
+}

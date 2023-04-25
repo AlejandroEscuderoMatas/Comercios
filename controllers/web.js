@@ -50,6 +50,13 @@ const createWeb = async (req, res) => {
     res.send(data)
 }
 
+const createText = async (req, res) => {
+
+    const web = await webModel.findByIdAndUpdate(req.commerceId, { $push: { texts: req.body.texts } }, { new: true })
+
+    res.send(web)
+}
+
 const updateWeb = async (req, res) => {
     try{
         const {id, ...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
@@ -76,4 +83,4 @@ const deleteWeb = async (req, res) => {
     }
 }
 
-module.exports = { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb };
+module.exports = { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText };

@@ -30,12 +30,12 @@ const checkUniqueWeb = async (req, res, next) => {
         return
     }
 
-    console.log(web)
+    /*console.log(web)
 
     if(web.deleted == true)
     {
         web.deleted == false
-    }
+    }*/
     
     next()
 }
