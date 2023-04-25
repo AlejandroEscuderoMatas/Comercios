@@ -2,8 +2,8 @@ POST http://localhost:3000/api/auth/register/
 Content-Type: application/json
 
 {
-    "name": "Rober",
-    "email": "Rober@utad.com",
+    "name": "PETEr",
+    "email": "PETEr@utad.com",
     "password": "password",
     "age": 22,
     "city": "madrid",
