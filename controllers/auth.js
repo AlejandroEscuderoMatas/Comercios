@@ -1,5 +1,5 @@
 const { matchedData } = require("express-validator")
-const { tokenSign } = require("../utils/handleJwt")
+const { tokenSignUser, tokenSignCommerce } = require("../utils/handleJwt")
 const { encrypt, compare } = require("../utils/handlePassword")
 const {handleHttpError} = require("../utils/handleErrors")
 const {userModel, commerceModel} = require("../models")
@@ -20,7 +20,7 @@ const registerUser = async (req, res) => {
         dataUser.set('password', undefined, { strict: false })
 
         const data = {
-            token: await tokenSign(dataUser),
+            token: await tokenSignUser(dataUser),
             user: dataUser
         }
         res.send(data)  
@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
         //Si no quisiera devolver el hash del password
         user.set('password', undefined, {strict: false})
         const data = {
-            token: await tokenSign(user),
+            token: await tokenSignUser(user),
             user
         }
 
@@ -85,7 +85,7 @@ const loginCommerce = async (req, res) => {
         }
         
         const data = {
-            token: await tokenSign(commerce),
+            token: await tokenSignCommerce(commerce),
             commerce
         }
 

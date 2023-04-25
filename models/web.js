@@ -7,7 +7,8 @@ const WebSheme = new mongoose.Schema(
             type: String
         },
         activity: {
-            type: String
+            type: String,
+            enum: ["cars", "clothes", "sport", "food"]
         },
         title:{
             type: String  // TODO Guardaremos el hash

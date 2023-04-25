@@ -21,7 +21,8 @@ const UserSheme = new mongoose.Schema(
             type: String,
         },
         interests: {
-            type: [String]
+            type: [String],
+            enum: ["cars", "clothes", "sport", "food"]
         },
         accept: {
             type: Boolean

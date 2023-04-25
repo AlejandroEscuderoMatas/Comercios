@@ -1,5 +1,5 @@
 const { handleHttpError } = require("../utils/handleErrors")
-const { verifyToken }     = require("../utils/handleJwt")
+const { verifyTokenUser, verifyTokenCommerce }     = require("../utils/handleJwt")
 const { userModel, commerceModel, webModel }      = require("../models")
 
 const authMiddlewareUser = async (req, res, next) => {
@@ -12,7 +12,7 @@ const authMiddlewareUser = async (req, res, next) => {
         // Nos llega la palabra reservada Bearer (es un estándar) y el Token, así que me quedo con la última parte
         const token = req.headers.authorization.split(' ').pop() 
         //Del token, miramos en Payload (revisar verifyToken de utils/handleJwt)
-        const dataToken = await verifyToken(token)
+        const dataToken = await verifyTokenUser(token)
 
         if(!dataToken) {
             handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
@@ -40,7 +40,7 @@ const authMiddlewareCommerce = async (req, res, next) => {
         // Nos llega la palabra reservada Bearer (es un estándar) y el Token, así que me quedo con la última parte
         const token = req.headers.authorization.split(' ').pop() 
         //Del token, miramos en Payload (revisar verifyToken de utils/handleJwt)
-        const dataToken = await verifyToken(token)
+        const dataToken = await verifyTokenCommerce(token)
 
         if(!dataToken) {
             handleHttpError(res, "NOT_PAYLOAD_DATA", 401)
@@ -48,14 +48,6 @@ const authMiddlewareCommerce = async (req, res, next) => {
         }
 
         const commerce = await commerceModel.findById(dataToken._id)
-
-        const web = await webModel.findById(dataToken._id)
-
-        //Comprobamos que la el comercio no tenga ya una web creada
-        if(web != null) {
-            handleHttpError(res, "WEB_ALREADY_EXISTS", 401)
-            return
-        }
 
         req.commerceId = commerce._id // Inyecto al comercio en la petición
 

@@ -152,7 +152,7 @@ Content-Type: application/json
 
 
 GET http://localhost:3000/api/web/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODIzNTYxMjUsImV4cCI6MTY4MjM2MzMyNX0.1DSsO4ajHJTPEuU2egGOxZS0VlmpDjnm5o9YK6XNHqY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4MDEsImV4cCI6MTY4MjQyMTAwMX0.teyjW4IcWbCC_BATDl_L90EsUFeB1XS6PlYax-bh5PU
 
 ###
 
@@ -176,7 +176,7 @@ GET http://localhost:3000/api/web/search/Madrid/futbol
 
 POST http://localhost:3000/api/web/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODIzNjQ2MzksImV4cCI6MTY4MjM3MTgzOX0._NJSN3KuL8YVg-dP5Qv7mxn8Kr01vNWbCqIQybDxeTw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4MDEsImV4cCI6MTY4MjQyMTAwMX0.teyjW4IcWbCC_BATDl_L90EsUFeB1XS6PlYax-bh5PU
 
 {
     "city": "Madrid",
@@ -189,7 +189,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlM
 
 PUT http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODIzNjQ2MzksImV4cCI6MTY4MjM3MTgzOX0._NJSN3KuL8YVg-dP5Qv7mxn8Kr01vNWbCqIQybDxeTw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4OTcsImV4cCI6MTY4MjQyMTA5N30.BH8EmFgJEMXmdzglEcUPdqvyxPN_0l0uTkWvYRaZAxw
 
 {
     "city": "Web 1",
@@ -200,4 +200,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlM
 
 ###
 
-DELETE http://localhost:3000/api/web/6436efb74485dd1300a637db HTTP/1.1
+DELETE http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4OTcsImV4cCI6MTY4MjQyMTA5N30.BH8EmFgJEMXmdzglEcUPdqvyxPN_0l0uTkWvYRaZAxw

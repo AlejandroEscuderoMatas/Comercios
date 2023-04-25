@@ -1,5 +1,6 @@
 const { check } = require("express-validator")
 const validateResults = require("../utils/handleValidator.js")
+const { handleHttpError } = require("../utils/handleErrors")
 const { webModel } = require("../models")
 
 const validatorCreateWeb = [
@@ -19,4 +20,34 @@ const validatorGetWeb = [
     }
 ]
 
-module.exports = {validatorCreateWeb, validatorGetWeb }
+const checkUniqueWeb = async (req, res, next) => {
+    
+    const web = await webModel.findById(req.commerceId)
+
+    //Comprobamos que la el comercio no tenga ya una web creada
+    if(web != null) {
+        handleHttpError(res, "WEB_ALREADY_EXISTS", 401)
+        return
+    }
+
+    console.log(web)
+
+    if(web.deleted == true)
+    {
+        web.deleted == false
+    }
+    
+    next()
+}
+
+const checkAccessWeb = async (req, res, next) => {
+    //Comprobamos que la el comercio no tenga ya una web creada
+    if(req.commerceId != req.params.id) {
+        handleHttpError(res, "NOT_YOUR_WEB", 401)
+        return
+    }
+    
+    next()
+}
+
+module.exports = {validatorCreateWeb, validatorGetWeb, checkUniqueWeb, checkAccessWeb }

@@ -4,7 +4,7 @@ const jwt           = require("jsonwebtoken")
  * El objeto del usuario
  * @param {*} user 
  */
-const tokenSign = async (user) => {
+const tokenSignUser = async (user) => {
     const sign = jwt.sign(
         {
             _id: user._id,
@@ -18,11 +18,22 @@ const tokenSign = async (user) => {
     return sign
 }
 
+const tokenSignCommerce = async (user) => {
+    const sign = jwt.sign(
+        {
+            _id: user._id,
+            //role: user.role
+        },
+        process.env.JWT_SECRET,
+    )
+    return sign
+}
+
 /**
  * Token se sesión
  * @param {*} tokenJwt 
  */
-const verifyToken = async (tokenJwt) => {
+const verifyTokenUser = async (tokenJwt) => {
     try {
         return jwt.verify(tokenJwt, process.env.JWT_SECRET)
     }catch(err) {
@@ -30,4 +41,12 @@ const verifyToken = async (tokenJwt) => {
     }
 }
 
-module.exports = { tokenSign, verifyToken }
+const verifyTokenCommerce = async (tokenJwt) => {
+    try {
+        return jwt.verify(tokenJwt, process.env.JWT_SECRET)
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+module.exports = { tokenSignUser, tokenSignCommerce, verifyTokenUser, verifyTokenCommerce }
