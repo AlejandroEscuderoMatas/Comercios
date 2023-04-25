@@ -10,7 +10,7 @@ const tokenSignUser = async (user) => {
             _id: user._id,
             //role: user.role
         },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET_USER,
         {
             expiresIn: "2h"
         }
@@ -24,7 +24,7 @@ const tokenSignCommerce = async (user) => {
             _id: user._id,
             //role: user.role
         },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET_COMMERCE,
     )
     return sign
 }
@@ -35,7 +35,7 @@ const tokenSignCommerce = async (user) => {
  */
 const verifyTokenUser = async (tokenJwt) => {
     try {
-        return jwt.verify(tokenJwt, process.env.JWT_SECRET)
+        return jwt.verify(tokenJwt, process.env.JWT_SECRET_USER)
     }catch(err) {
         console.log(err)
     }
@@ -43,7 +43,7 @@ const verifyTokenUser = async (tokenJwt) => {
 
 const verifyTokenCommerce = async (tokenJwt) => {
     try {
-        return jwt.verify(tokenJwt, process.env.JWT_SECRET)
+        return jwt.verify(tokenJwt, process.env.JWT_SECRET_COMMERCE)
     }catch(err) {
         console.log(err)
     }

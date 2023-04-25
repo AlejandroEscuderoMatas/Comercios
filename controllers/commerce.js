@@ -1,6 +1,7 @@
 const { matchedData } = require('express-validator')
 const { commerceModel } = require('../models')
 const { handleHttpError } = require('../utils/handleErrors')
+const { tokenSignCommerce } = require("../utils/handleJwt")
 
 const getCommerces = async (req, res) => {
     const data = await commerceModel.find({})
@@ -24,7 +25,14 @@ const getCommerce = async (req, res) => {
 
 const createCommerce = async (req, res) => {
     const { body } = req
-    const data = await commerceModel.create(body)
+    
+    const commerce = await commerceModel.create(body)
+
+    const data = {
+        token: await tokenSignCommerce(commerce),
+        commerce
+    }
+
     res.send(data)
 }
 

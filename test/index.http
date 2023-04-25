@@ -1,25 +1,25 @@
-POSt http://localhost:3000/api/auth/register/
+POST http://localhost:3000/api/auth/register/
 Content-Type: application/json
 
 {
-    "name": "Pepe",
-    "email": "pepe@utad.com",
+    "name": "Rober",
+    "email": "Rober@utad.com",
     "password": "password",
     "age": 22,
     "city": "madrid",
     "accept": true,
-    "interests": ["cars", "basket"],
+    "interests": ["cars"],
     "role": "user"
 }
 
 ###
 
-POSt http://localhost:3000/api/auth/login/
+POST http://localhost:3000/api/auth/login/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODE4MDk0NTQsImV4cCI6MTY4MTgxNjY1NH0.oMpwaNpEBCKLz6pcqsh9bis6rhc8Gq4zCq1wH0row5I
 
 {
-    "email": "pepe@utad.com",
+    "email": "danie@utad.com",
     "password": "password"
 }
 
@@ -91,26 +91,26 @@ DELETE http://localhost:3000/api/user/6435458e46a405a819d0901c HTTP/1.1
 ###SOLO SIENDO ADMIN TENEMOS ACCESO A LAS PETICIONES DE LOS COMERCIOS
 
 GET http://localhost:3000/api/commerce/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ4MDk2MTllM2RkYmY0ZjhkMjI0MmMiLCJpYXQiOjE2ODI0NDI2MjQsImV4cCI6MTY4MjQ0OTgyNH0.XVs4iRxOeP7FBd05OIG_Sc93Br8yE8RKc5dLF-9JsUc
 
 ###
 
 GET http://localhost:3000/api/commerce/6436efe14485dd1300a637e7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ4MDk2MTllM2RkYmY0ZjhkMjI0MmMiLCJpYXQiOjE2ODI0NDI2MjQsImV4cCI6MTY4MjQ0OTgyNH0.XVs4iRxOeP7FBd05OIG_Sc93Br8yE8RKc5dLF-9JsUc
 
 ###
 
 POST http://localhost:3000/api/commerce/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODIzNTM0NjIsImV4cCI6MTY4MjM2MDY2Mn0.TTXJ4FK-2lO8j2B6ZkFKTPv8Q-z_n1hSXDQriSQyE8s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ4MDk2MTllM2RkYmY0ZjhkMjI0MmMiLCJpYXQiOjE2ODI0NDI2MjQsImV4cCI6MTY4MjQ0OTgyNH0.XVs4iRxOeP7FBd05OIG_Sc93Br8yE8RKc5dLF-9JsUc
 
 {
-    "name": "Comercio 10",
-    "CIF": "22355693H",
-    "email": "comercio10@email.com",
+    "name": "Comercio 2345",
+    "CIF": "22345347H",
+    "email": "comercio2345@email.com",
     "direction": "calle Comercio numero 3",
-    "phone": 567345523,
-    "mediaId": "0123456789abcdef01234568"
+    "phone": 567345723,
+    "mediaId": "0123456789abcdef01234564"
 }
 
 ###
@@ -120,9 +120,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZ
 Content-Type: application/json
 
 {
-    "name": "Comercio 10",
-    "CIF": "22355693H",
-    "email": "comercio10@email.com",
+    "name": "Comercio 15",
+    "CIF": "22375693H",
+    "email": "comercio15@email.com",
     "direction": "calle Comercio numero 3",
     "phone": 567345723,
     "mediaId": "0123456789abcdef01234564"

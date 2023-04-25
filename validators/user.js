@@ -1,5 +1,7 @@
 const { check } = require("express-validator")
 const validateResults = require("../utils/handleValidator.js")
+const { handleHttpError } = require("../utils/handleErrors")
+const { userModel } = require("../models/index.js")
 
 const validatorCreateUser = [
     check("name").exists().notEmpty().isLength( {min:3, max: 99} ),
@@ -22,4 +24,17 @@ const validatorGetUser = [
     }
 ]
 
-module.exports = {validatorCreateUser, validatorGetUser}
+const checkUniquesUser = async (req, res, next) => {
+    
+    const user = await userModel.findOne({ email: req.body.email })
+
+    if(user != null)
+    {
+        handleHttpError(res, "EMAIL_ALREADY_IN_USE")
+        return
+    }
+    
+    next()
+}
+
+module.exports = {validatorCreateUser, validatorGetUser, checkUniquesUser}
