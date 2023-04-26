@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText, uploadImage } = require("../controllers/web")
+const { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText, uploadImage, punctuateWeb } = require("../controllers/web")
 const { validatorCreateWeb, validatorGetWeb, checkUniqueWeb, checkAccessWeb } = require("../validators/web")
-const { authMiddlewareCommerce } = require("../middleware/session")
+const { authMiddlewareCommerce, authMiddlewareUser } = require("../middleware/session")
 const uploadMiddleware = require("../utils/handleStorage")
 
 router.get("/", getWebs)
@@ -24,5 +24,7 @@ router.delete("/:id", authMiddlewareCommerce, checkAccessWeb, validatorGetWeb, d
 router.post("/texts/:id", authMiddlewareCommerce, checkAccessWeb, createText)
 
 router.post("/photos/:id", authMiddlewareCommerce, checkAccessWeb, uploadMiddleware.single("image"), uploadImage)
+
+router.patch("/:id", authMiddlewareUser, validatorGetWeb, punctuateWeb)
 
 module.exports = router

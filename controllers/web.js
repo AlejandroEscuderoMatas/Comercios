@@ -93,4 +93,44 @@ const uploadImage = async (req, res) => {
     res.send(data)
 }
 
-module.exports = { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText, uploadImage };
+const punctuateWeb = async (req, res) => {
+    const webId = req.params.id
+    const {score, review} = req.body
+
+    const web = await webModel.findById(webId)
+
+    if(!web)
+    {
+        handleHttpError(res, 'ERROR_NOT_WEB')
+        return
+    }
+
+    if(score < 0 || score > 10)
+    {
+        handleHttpError(res, 'ERROR_FORBIDDEN_SCORE')
+        return
+    }
+
+    const numScores = web.data.scoring_ammount + 1
+    const scoreSummatory = web.data.scoreSummatory + score
+    const newScore = (scoreSummatory)/numScores
+
+    console.log(review)
+
+    const data = await webModel.
+    findByIdAndUpdate(webId, 
+        {   /*data: {
+                $push: { reviews: review }, 
+                scoring: newScore, 
+                scoreSummatory: scoreSummatory,
+                scoring_ammount: numScores}*/
+            $push: { 'data.reviews': review }, 
+            'data.scoring': newScore, 
+            'data.scoreSummatory': scoreSummatory,
+            'data.scoring_ammount': numScores
+        }, { new: true })
+
+    res.send(data)
+}
+
+module.exports = { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText, uploadImage, punctuateWeb };

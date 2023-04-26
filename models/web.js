@@ -31,6 +31,10 @@ const WebSheme = new mongoose.Schema(
                 type: Number,
                 default: 0
             },
+            scoreSummatory: {
+                type: Number,
+                default: 0
+            },
             reviews: {
                 type: [String]
             }

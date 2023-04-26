@@ -230,3 +230,14 @@ Content-Type: application/json
 {
     "texts": "Primer texto de la web"
 }
+
+###
+
+PATCH http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ4MDk2MTllM2RkYmY0ZjhkMjI0MmMiLCJpYXQiOjE2ODI1MjI3OTAsImV4cCI6MTY4MjUyOTk5MH0.ponRLq9fygVfn64jpRRbao_FDu1PSbpxyX6mQ3tRXNc
+Content-Type: application/json
+
+{
+    "score": 8,
+    "review": "Second web Review"
+}
