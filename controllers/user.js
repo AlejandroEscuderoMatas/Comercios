@@ -1,5 +1,5 @@
 const { matchedData } = require('express-validator')
-const { userModel } = require('../models')
+const { userModel, webModel } = require('../models')
 const { handleHttpError } = require('../utils/handleErrors')
 
 const getUsers = async (req, res) => {
@@ -15,6 +15,28 @@ const getUser = async (req, res) => {
     try{
         const {id} = matchedData(req) //Me quedo solo con el id
         const data = await userModel.findById(id)
+        res.send(data)
+    } catch(err){
+        console.log(err)
+        handleHttpError(res, "ERROR_GET_USER")
+    }
+}
+
+const getUsersMerchant = async (req, res) => {
+    try{
+        const _city = req.params.city
+        const web = await webModel.findById(req.commerceId)
+
+        if(web == null)
+        {
+            handleHttpError(res, "ERROR_NOT_WEB")
+            return
+        }
+
+        const _activity = web.activity
+        const data = await userModel.find({city: _city, activity: _activity, accept: true}).select("name email age")
+
+        console.log(data)
         res.send(data)
     } catch(err){
         console.log(err)
@@ -54,4 +76,4 @@ const deleteUser = async (req, res) => {
     }
 }
 
-module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
+module.exports = { getUsers, getUser, createUser, updateUser, deleteUser, getUsersMerchant };

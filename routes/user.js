@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const { getUsers, getUser, createUser, updateUser, deleteUser } = require("../controllers/user")
+const { getUsers, getUser, createUser, updateUser, deleteUser, getUsersMerchant } = require("../controllers/user")
 const {validatorGetUser, validatorCreateUser, checkUniquesUser} = require("../validators/user")
-const authMiddleware = require("../middleware/session")
+const {authMiddlewareCommerce} = require("../middleware/session")
 
 router.get("/", getUsers)
 
@@ -15,5 +15,7 @@ router.post("/", checkUniquesUser, validatorCreateUser, createUser)
 router.put("/:id", checkUniquesUser, validatorGetUser, validatorCreateUser, updateUser)
 
 router.delete("/:id", validatorGetUser, deleteUser)
+
+router.get("/search/:city", authMiddlewareCommerce, getUsersMerchant)
 
 module.exports = router
