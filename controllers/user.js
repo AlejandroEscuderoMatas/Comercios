@@ -34,7 +34,7 @@ const getUsersMerchant = async (req, res) => {
         }
 
         const _activity = web.activity
-        const data = await userModel.find({city: _city, activity: _activity, accept: true}).select("name email age")
+        const data = await userModel.find({city: _city, interests: _activity, accept: true}).select("name email age")
 
         console.log(data)
         res.send(data)
