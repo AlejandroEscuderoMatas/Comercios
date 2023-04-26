@@ -150,6 +150,19 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3000/api/web/photos/6436efe14485dd1300a637e7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0OTU0MDB9.XS2Scyrz11WEAstA8xIIchGscPIgYfcgoeg2d4HhlMg
+Content-Type: multipart/form-data; boundary=Boundry
+
+--Boundry
+Content-Disposition: form-data; name="image"; filename="farmacia_fachada_013.jpg"
+Content-Type: image/jpg
+
+< ./farmacia_fachada_013.jpg
+--Boundry--
+
+###
+
 
 GET http://localhost:3000/api/web/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0MTM4MDEsImV4cCI6MTY4MjQyMTAwMX0.teyjW4IcWbCC_BATDl_L90EsUFeB1XS6PlYax-bh5PU

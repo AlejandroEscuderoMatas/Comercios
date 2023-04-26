@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
-const { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText } = require("../controllers/web")
+const { getWebs, getWeb, searchWeb, createWeb, updateWeb, deleteWeb, createText, uploadImage } = require("../controllers/web")
 const { validatorCreateWeb, validatorGetWeb, checkUniqueWeb, checkAccessWeb } = require("../validators/web")
 const { authMiddlewareCommerce } = require("../middleware/session")
+const uploadMiddleware = require("../utils/handleStorage")
 
 router.get("/", getWebs)
 
@@ -21,5 +22,7 @@ router.put("/:id", authMiddlewareCommerce, checkAccessWeb, validatorGetWeb, vali
 router.delete("/:id", authMiddlewareCommerce, checkAccessWeb, validatorGetWeb, deleteWeb)
 
 router.post("/texts/:id", authMiddlewareCommerce, checkAccessWeb, createText)
+
+router.post("/photos/:id", authMiddlewareCommerce, checkAccessWeb, uploadMiddleware.single("image"), uploadImage)
 
 module.exports = router
