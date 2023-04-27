@@ -16,7 +16,6 @@ Content-Type: application/json
 
 POST http://localhost:3000/api/auth/login/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNlNjAyZTFjMmVmODFhNTJiMThhOGYiLCJpYXQiOjE2ODE4MDk0NTQsImV4cCI6MTY4MTgxNjY1NH0.oMpwaNpEBCKLz6pcqsh9bis6rhc8Gq4zCq1wH0row5I
 
 {
     "email": "danie@utad.com",
