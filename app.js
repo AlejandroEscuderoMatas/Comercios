@@ -15,12 +15,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(swaggerSpecs)
-)
-
-app.use("/api", require("./routes")); // reads routes/index.js by default
+app.use(express.static("storage"))
 
 morganBody(app, {
     noColors: true,
@@ -29,6 +24,15 @@ morganBody(app, {
     },
     stream: loggerStream
 })
+
+app.use("/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpecs)
+)
+
+app.use("/api", require("./routes")); // reads routes/index.js by default
+
+
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
