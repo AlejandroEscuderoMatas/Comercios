@@ -41,7 +41,8 @@ const updateCommerce = async (req, res) => {
         const {id, ...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
         
         const data = await commerceModel.findByIdAndUpdate(id, body)
-        res.send(data)
+        const newData = await commerceModel.findById(id)
+        res.send(newData)
     }
     catch(err)
     {

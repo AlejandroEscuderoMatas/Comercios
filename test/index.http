@@ -2,14 +2,14 @@ POST http://localhost:3000/api/auth/register/
 Content-Type: application/json
 
 {
-    "name": "admin",
-    "email": "admin@utad.com",
+    "name": "Tia",
+    "email": "Tia@utad.com",
     "password": "password",
     "age": 22,
-    "city": "madrid",
+    "city": "Madrid",
     "accept": true,
-    "interests": ["cars"],
-    "role": "admin"
+    "interests": ["sport"],
+    "role": "user"
 }
 
 ###
@@ -106,21 +106,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiN
 
 POST http://localhost:3000/api/commerce/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiNjc3NzE3ZDY1YWZhMTQyOTUiLCJpYXQiOjE2ODMyMzMzMjIsImV4cCI6MTY4MzI0MDUyMn0.m0dOWX9LYvmhITXd_B0REJuqbEtCAyLTAmUPdAi8gAY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiNjc3NzE3ZDY1YWZhMTQyOTUiLCJpYXQiOjE2ODMzMDg4NTksImV4cCI6MTY4MzMxNjA1OX0.AfRg60ToHIxjD2FDbHpDXxJPQG-YUMs1aSSGFVb00Cg
 
 {
-    "name": "Comercio 2345",
-    "CIF": "223453489H",
-    "email": "comercio2945@email.com",
+    "name": "Comercio 225",
+    "CIF": "2234589H",
+    "email": "comercio24@email.com",
     "direction": "calle Comercio numero 3",
     "phone": 567345723,
-    "mediaId": "0123456789abcdef01234564"
+    "mediaId": "012345678abcdef01234564"
 }
 
 ###
 
-PUT http://localhost:3000/api/commerce/6446ae92a50706b9e97e3b8e HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiNjc3NzE3ZDY1YWZhMTQyOTUiLCJpYXQiOjE2ODMyMzMzMjIsImV4cCI6MTY4MzI0MDUyMn0.m0dOWX9LYvmhITXd_B0REJuqbEtCAyLTAmUPdAi8gAY
+PUT http://localhost:3000/api/commerce/6455414b25d35e52dd567d21 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiNjc3NzE3ZDY1YWZhMTQyOTUiLCJpYXQiOjE2ODMzMDg5ODEsImV4cCI6MTY4MzMxNjE4MX0.zc_WlkeghG-0pgjMxXePIjs4MFrY-7WH07_Ovfx-ltw
 Content-Type: application/json
 
 {
@@ -149,7 +149,7 @@ POST http://localhost:3000/api/auth/login/commerce
 Content-Type: application/json
 
 {
-    "name": "Comercio 2"
+    "name": "Comercio 15"
 }
 
 ###
@@ -173,7 +173,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlM
 
 ###
 
-GET http://localhost:3000/api/web/6436f3bc91303f93a0ac109e
+GET http://localhost:3000/api/web/6455414b25d35e52dd567d21
 
 
 
@@ -193,7 +193,7 @@ GET http://localhost:3000/api/web/search/Madrid/futbol
 
 POST http://localhost:3000/api/web/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY0NjF9.YN2zU1NdDEfQchM3TfH0TpcJVFQ6Tp6p0B7F0mYnzoc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU1NDE0YjI1ZDM1ZTUyZGQ1NjdkMjEiLCJpYXQiOjE2ODMzMDkxNTJ9.VyXAC05G1AV9D9hHnntZ3HrYifEDI76__4jzH-OlQIk
 
 {
     "city": "Madrid",
@@ -217,23 +217,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlM
 
 ###
 
-DELETE http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY5MTR9.Fn5TX9ZomV-ZdBJgs5SYVxusIIuYHiU_pGF5apvYBy8
+DELETE http://localhost:3000/api/web/6455414b25d35e52dd567d21 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU1NDE0YjI1ZDM1ZTUyZGQ1NjdkMjEiLCJpYXQiOjE2ODMzMDkwNTl9.8nwOqpO_tUreyrPZIHA1nk00hbFOjRExU_uiadD-6h4
 
 ###
 
-POST http://localhost:3000/api/web/texts/6436efe14485dd1300a637e7 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2ZWZlMTQ0ODVkZDEzMDBhNjM3ZTciLCJpYXQiOjE2ODI0NDY5MTR9.Fn5TX9ZomV-ZdBJgs5SYVxusIIuYHiU_pGF5apvYBy8
+POST http://localhost:3000/api/web/texts/6455414b25d35e52dd567d21 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU1NDE0YjI1ZDM1ZTUyZGQ1NjdkMjEiLCJpYXQiOjE2ODMzMDkwNTl9.8nwOqpO_tUreyrPZIHA1nk00hbFOjRExU_uiadD-6h4
 Content-Type: application/json
 
 {
-    "texts": "Primer texto de la web"
+    "texts": ["Texto web 1", "Texto web 2"]
 }
 
 ###
 
 PATCH http://localhost:3000/api/web/6436efe14485dd1300a637e7 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ4MDk2MTllM2RkYmY0ZjhkMjI0MmMiLCJpYXQiOjE2ODI1MjI3OTAsImV4cCI6MTY4MjUyOTk5MH0.ponRLq9fygVfn64jpRRbao_FDu1PSbpxyX6mQ3tRXNc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDU0MGRiNjc3NzE3ZDY1YWZhMTQyOTUiLCJpYXQiOjE2ODMzNjgwMzYsImV4cCI6MTY4MzM3NTIzNn0.rrXqpvuSBIuzRhJauG8GXeeMGLn2ASnyqQZf-3j2EzY
 Content-Type: application/json
 
 {

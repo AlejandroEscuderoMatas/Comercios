@@ -55,7 +55,8 @@ const updateWeb = async (req, res) => {
         const {id, ...body} = matchedData(req) //Extrae el id y el resto lo asigna a la constante body
         
         const data = await webModel.findByIdAndUpdate(id, body)
-        res.send(data)
+        const newData = await webModel.findById(id)
+        res.send(newData)
     }
     catch(err)
     {

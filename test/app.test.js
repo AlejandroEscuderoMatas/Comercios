@@ -2,8 +2,10 @@ const request = require("supertest");
 const app = require("../app");
 const commerce = require("../models/commerce");
 
+var commerceToken = "";
+var adminToken = "";
+
 describe("Pruebas ADMIN", () => {
-  let adminToken = "";
   let adminId = "";
   let commerceId = "";
 
@@ -67,11 +69,11 @@ describe("Pruebas ADMIN", () => {
       .auth(adminToken, { type: "bearer" })
       .send({
         name: "Estanco Luisa",
-        CIF: "22745357H",
+        CIF: "22745337H",
         email: "estancoLuisa@gmail.com",
         direction: "calle Comercio numero 3",
-        phone: 567345789,
-        mediaId: "0123456789abcdef01234569"
+        phone: 568345789,
+        mediaId: "0123476789abcdef01234569"
       })
       .set("Accept", "application/json")
       .expect(200);
@@ -86,199 +88,195 @@ describe("Pruebas ADMIN", () => {
   });
 });
 
-describe("Pruebas MERCHANT", () => {
-  let merchantToken = "";
-  let merchantId = "";
-  let merchantWebId = "";
+describe("Pruebas COMMERCE", () => {
+  
+  let commerceId = "";
+  let commerceWebId = "";
+  it("An admin should register a commerce", async () => {
+    const response = await request(app)
+      .post("/api/commerce/")
+      .send({
+        "name": "Carniceria",
+        "CIF": "22745747H",
+        "email": "Carniceria@gmail.com",
+        "direction": "calle Comercio numero 4",
+        "phone": 567348723,
+        "mediaId": "0123456789atcdef01234569"
+      })
+      .auth(adminToken, { type: "bearer" })
+      .set("Accept", "application/json")
+      .expect(200);
 
-  it("[MERCHANT]should log in a merchant", async () => {
-    const res = await request(app)
-      .post("/api/commerce/login")
-      .set("Accept", "application/json")
-      .send({
-        email: "adidas@gmail.com",
-        password: "nikeesmejor123",
-      })
-      .expect(200);
-    merchantToken = res.body.data.token;
-    merchantId = res.body.data.merchant._id;
-    merchantWebId = res.body.data.merchant.pageId;
+    expect(response.body.commerce.email).toEqual("Carniceria@gmail.com");
+    commerceToken = response.body.token;
+    commerceName = response.body.commerce.name;
+    commerceId = response.body.commerce._id;
+    commerceWebId = commerceId;
   });
-  it("[MERCHANT]should give error, merchant tried to upload content to another commerce or non-existing website", async () => {
+  it("A commerce should upload content to its website", async () => {
     const response = await request(app)
-      .post("/api/webpages/" + "123" + merchantWebId)
+      .post("/api/web/")
       .send({
-        city: "madrid",
-        activity: "futbol",
-        title: "Partido de futbol",
-        summary: "partido de futbol con pele y maradona",
+        city: "Madrid",
+        activity: "cars",
+        title: "Coches de moda",
+        resume: "Esto es de coches",
       })
-      .auth(merchantToken, { type: "bearer" })
+      .auth(commerceToken, { type: "bearer" })
       .set("Accept", "application/json")
-      .expect(500);
+      .expect(200);
+    expect(response.body.city).toEqual("Madrid");
+    expect(response.body.activity).toEqual("cars");
   });
-  it("[MERCHANT]should upload content to commerce website", async () => {
+  it("A commerce should update their content", async () => {
+    const res = await request(app)
+      .put("/api/web/" + commerceWebId)
+      .auth(commerceToken, { type: "bearer" })
+      .send({
+        city: "Barcelona",
+        activity: "cars",
+        title: "Coches de moda",
+        resume: "Esto es de coches"
+      })
+      .set("Accept", "application/json")
+      .expect(200);
+    expect(res.body.city).toEqual("Barcelona");
+  });
+  it("A commerce should introduce new text to their content", async () => {
+    const res = await request(app)
+      .post("/api/web/texts/" + commerceWebId)
+      .auth(commerceToken, { type: "bearer" })
+      .send({
+        texts: ["Texto web 1", "Texto web 2"],
+      })
+      .set("Accept", "application/json")
+      .expect(200);
+    expect(res.body.texts).toHaveLength(2);
+  });
+  it("A commerce should get users of city which has accept = true", async () => {
     const response = await request(app)
-      .post("/api/webpages/" + merchantWebId)
-      .send({
-        city: "madrid",
-        activity: "futbol",
-        title: "Partido de futbol",
-        summary: "partido de futbol con pele y maradona",
-      })
-      .auth(merchantToken, { type: "bearer" })
-      .set("Accept", "application/json")
-      .expect(200);
-    expect(response.body.webpage.city).toEqual("madrid");
-    expect(response.body.webpage.activity).toEqual("futbol");
-  });
-  it("[MERCHANT]should update their content", async () => {
-    const res = await request(app)
-      .put("/api/webpages/" + merchantWebId)
-      .auth(merchantToken, { type: "bearer" })
-      .send({
-        city: "barcelona",
-        // activity: "badminton", demostrando que se hace put con lo q quieras
-        // title: "Partido de badminton",
-      })
-      .set("Accept", "application/json")
-      .expect(200);
-    expect(res.body.city).toEqual("barcelona");
-    // expect(res.body.activity).toEqual("badminton");
-    // expect(res.body.title).toEqual("Partido de badminton");
-  });
-  it("[MERCHANT]should introduce new text to their content", async () => {
-    const res = await request(app)
-      .post("/api/webpages/" + merchantWebId + "/texts")
-      .auth(merchantToken, { type: "bearer" })
-      .send({
-        texts: ["nuevotexto1", "textonuevo2"],
-      })
-      .set("Accept", "application/json")
-      .expect(200);
-    expect(res.body.response.texts).toHaveLength(2);
-  });
-  it("[MERCHANT]should delete the content in their website", async () => {
-    const res = await request(app)
-      .delete("/api/webpages/" + merchantWebId)
-      .auth(merchantToken, { type: "bearer" })
-      .expect(200);
-  });
-  it("[MERCHANT]should get users of city which has receiveOffers:true", async () => {
-    const response = await request(app)
-      .get("/api/users/" + "madrid")
-      .auth(merchantToken, { type: "bearer" })
+      .get("/api/user/search/madrid")
+      .auth(commerceToken, { type: "bearer" })
       .set("Accept", "application/json")
       .expect(200);
 
     expect(response.body).toBeDefined();
+  });
+  it("A commerce should delete its website", async () => {
+    const res = await request(app)
+      .delete("/api/web/" + commerceWebId)
+      .auth(commerceToken, { type: "bearer" })
+      .expect(200);
   });
 });
 
 describe("Pruebas USER", () => {
   var userToken = "";
   var userId = "";
-  var nikeWebId = "747074ee-e99e-4d57-8c08-d9ffdc3a439c";
-  it("[PUBLIC_USER]should get all webpages", async () => {
+  var idSportWeb = "6455414b25d35e52dd567d21";
+  it("A public user should get all webpages", async () => {
     const response = await request(app)
-      .get("/api/webpages/" + nikeWebId)
+      .get("/api/web/")
       .set("Accept", "application/json")
       .expect(200);
     expect(response.body).toBeDefined();
   });
-  it("[PUBLIC_USER]should get a commerce webpage", async () => {
+  it("A public user should get a commerce webpage", async () => {
     const response = await request(app)
-      .get("/api/webpages/")
+      .get("/api/web/" + idSportWeb)
       .set("Accept", "application/json")
       .expect(200);
     expect(response.body).toBeDefined();
-    expect(response.body.contents[0].activity).toEqual("baloncesto");
+    expect(response.body.activity).toEqual("sport");
   });
-  it("[PUBLIC_USER]should get webpages by city ordered by scoring", async () => {
+  it("A public user should get webpages by city", async () => {
     const response = await request(app)
-      .get("/api/webpages/search/barcelona/sort")
+      .get("/api/web/search/Madrid")
       .set("Accept", "application/json")
       .expect(200);
     expect(response.body).toBeDefined();
-    expect(response.body.webpages[0].activity).toEqual("baloncesto");
+    expect(response.body[0].activity).toEqual("sport");
   });
-  it("[PUBLIC_USER]should get webpages by city and activity", async () => {
+  it("A public user should get webpages by city and activity", async () => {
     const response = await request(app)
-      .get("/api/webpages/search/barcelona/baloncesto")
+      .get("/api/web/search/Madrid/sport")
       .set("Accept", "application/json")
       .expect(200);
     expect(response.body).toBeDefined();
-    expect(response.body.webpages[0].activity).toEqual("baloncesto");
+    expect(response.body[0].activity).toEqual("sport");
   });
-  it("[PUBLIC_USER]should register a user", async () => {
+  it("A public user should register a user", async () => {
     const response = await request(app)
-      .post("/api/users/register")
+      .post("/api/auth/register")
       .send({
-        name: "Javier",
-        age: 21,
-        email: "javii@gmail.com",
-        password: "abc123..",
-        city: "madrid",
-        interests: "futbol",
-        allowOffers: "true",
+        name: "Alex",
+        email: "alexito@utad.com",
+        password: "password1",
+        age: 22,
+        city: "Madrid",
+        accept: true,
+        interests: ["sport"],
+        role: "user"
       })
       .set("Accept", "application/json")
       .expect(200);
-    expect(response.body.data.user.email).toEqual("javii@gmail.com");
+    expect(response.body.user.email).toEqual("alexito@utad.com");
   });
-  it("[PUBLIC_USER]should log in a user", async () => {
+  it("A public user should log in a user", async () => {
     const res = await request(app)
-      .post("/api/users/login")
+      .post("/api/auth/login")
       .set("Accept", "application/json")
       .send({
-        email: "javii@gmail.com",
-        password: "abc123..",
+        email: "Tia@utad.com",
+        password: "password",
       })
       .expect(200);
-    userToken = res.body.data.token;
-    userId = res.body.data.user._id;
+    userToken = res.body.token;
+    userId = res.body.user._id;
   });
-  it("[REGISTERED_USER]should update a user", async () => {
+  it("A registered user should update a user", async () => {
     const res = await request(app)
-      .put("/api/users/" + userId)
+      .put("/api/auth/update/" + userId)
       .auth(userToken, { type: "bearer" })
       .send({
-        name: "Javier Eustaquio",
+        name: "Javier",
+        email: "Javier@utad.com",
+        password: "password",
         age: 22,
+        city: "Madrid",
+        accept: true,
+        interests: ["sport"],
+        role: "user",
       })
       .set("Accept", "application/json")
       .expect(200);
-    expect(res.body.name).toEqual("Javier Eustaquio");
+    expect(res.body.name).toEqual("Javier");
   });
-  it("[REGISTERED_USER]should give a unauthorized because user not logged in", async () => {
+  it("A public user should give a unauthorized because user not logged in", async () => {
     const response = await request(app)
-      .patch("/api/webpages/" + nikeWebId)
+      .patch("/api/web/" + idSportWeb)
       .send({
-        nonEditable: {
-          scoring: [10],
-          reviews: ["Increible partido, que bueno es el lstool"],
-        },
+        score: [8],
+        review: ["Second web Review"],
       })
       .set("Accept", "application/json")
       .expect(401);
   });
-  it("[REGISTERED_USER]should patch a review and scoring to webpage", async () => {
+  it("A registered user should patch a review and scoring to webpage", async () => {
     const response = await request(app)
-      .patch("/api/webpages/" + nikeWebId)
+      .patch("/api/web/" + idSportWeb)
       .auth(userToken, { type: "bearer" })
       .send({
-        nonEditable: {
-          scoring: [10],
-          reviews: ["Increible partido, que bueno es el lstool"],
-        },
+        score: 8,
+        review: ["Second web Review"],
       })
       .set("Accept", "application/json")
       .expect(200);
-    expect(response.body.activity).toEqual("baloncesto");
+    expect(response.body.activity).toEqual("sport");
   });
-  it("[REGISTERED_USER]should delete the user", async () => {
+  it("A registered user should delete its user", async () => {
     const res = await request(app)
-      .delete("/api/users/" + userId)
+      .delete("/api/auth/delete/" + userId)
       .auth(userToken, { type: "bearer" })
       .expect(200);
   });
