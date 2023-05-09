@@ -19,8 +19,6 @@ const uploadMiddleware = require("../utils/handleStorage")
  *              description: Returns all the webs created
  *          '500':
  *              description: Server error
- *      security:
- *          - bearerAuth: []
  */
 router.get("/", getWebs)
 
@@ -47,8 +45,6 @@ router.get("/", getWebs)
  *              description: Errors in parameters or not found web
  *          '500':
  *              description: Server error
- *      security:
- *          - bearerAuth: []
  */
 router.get("/:id", validatorGetWeb, getWeb)
 
@@ -75,8 +71,6 @@ router.get("/:id", validatorGetWeb, getWeb)
  *              description: Errors in parameters
  *          '500':
  *              description: Server error
- *      security:
- *          - bearerAuth: []
  */
 router.get("/search/:city", searchWeb)
 
@@ -109,8 +103,6 @@ router.get("/search/:city", searchWeb)
  *              description: Errors in parameters
  *          '500':
  *              description: Server error
- *      security:
- *          - bearerAuth: []
  */
 router.get("/search/:city/:activity", searchWeb)
 
